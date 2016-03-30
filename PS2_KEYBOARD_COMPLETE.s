@@ -1,5 +1,5 @@
-.include "nios_macros.s"
-stuffs
+#.include "nios_macros.s"
+
 .section .data
 
 PS2_BUFFER:						# Place in memory in which keys pressed are stored (to be used by VGA console)
@@ -173,14 +173,13 @@ INITIALIZE_PS2_DATA:
 	stw r0, 0(r9)
 
 	#Initialize PS2_BUFFER_POSITION to &( PS2_BUFFER ) + PS2_BUFFER_QUANTITY
-	movia r9, PS2_BUFFER_POSITION
-	ldw r9, 0(r9)
+	movia r9, PS2_BUFFER
 
 	movia r10, PS2_BUFFER_QUANTITY
 	ldw r10, 0(r10)
 
 	add r9, r9, r10
-	movia r10, PS2_BUFFER
+	movia r10, PS2_BUFFER_POSITION
 	stw r9, 0(r10)
 	
 LOOP:
@@ -851,10 +850,9 @@ UPDATE_PS2:
 	stw r16, 0(et)
 
 	movia et, PS2_BUFFER
-	ldb r17, 0(et)
 
 	# Update PS2_BUFFER_POSITION
-	add r16, r16, r17
+	add r16, r16, et
 
 	movia et, PS2_BUFFER_POSITION
 	stw r16, 0(et)
@@ -879,3 +877,4 @@ EPILOGUE:
 
 	addi ea, ea, -4
 	eret	
+	
