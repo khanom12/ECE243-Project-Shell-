@@ -1,5 +1,5 @@
 .include "nios_macros.s"
-
+stuffs
 .section .data
 
 PS2_BUFFER:						# Place in memory in which keys pressed are stored (to be used by VGA console)
