@@ -1,4 +1,4 @@
-#.include "nios_macros.s"
+.include "nios_macros.s"
 
 .section .data
 
